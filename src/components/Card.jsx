@@ -2,7 +2,7 @@ function Card({ movie }) {
   const { Poster, Title, Type, Year } = movie;
   return (
     <div className="row">
-      <div className="col s12 m7">
+      <div className="col s12 m12">
         <div className="card">
           <div className="card-image">
             <img src={Poster} />
