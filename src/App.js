@@ -8,41 +8,52 @@ class App extends React.Component {
   state = {
     movies: [],
     error: "",
+    loading: true,
   };
 
   componentDidMount() {
     fetch("http://www.omdbapi.com?apikey=f10742f1&s=matrix")
       .then((res) => res.json())
-      .then((data) => this.setState({ movies: data.Search }))
+      .then((data) => this.setState({ movies: data.Search, loading: false }))
       .catch((err) => {
         console.log("error");
       });
   }
 
   searchMovies = (str, type = "all") => {
+    // this.setState({ loading: true });
     fetch(
       `http://www.omdbapi.com?apikey=f10742f1&s=${str}${
         type !== "all" ? `&type=${type}` : ""
       }`
     )
       .then((res) => res.json())
-      .then((data) => this.setState({ movies: data.Search }))
+      .then((data) => {
+        this.setState({ loading: true });
+        this.setState({ movies: data.Search, loading: false });
+      })
       .catch((err) => {
         console.log("error");
       });
   };
 
   render() {
+    const { movies, loading, error } = this.state;
     return (
       <>
         <Header />
 
-        {this.state.error ? (
+        {/* {error ? (
           <p>Oops, not found this page</p>
-        ) : this.state.movies.length ? (
-          <Main movies={this.state.movies} searchMovies={this.searchMovies} />
-        ) : (
+        ) : loading ? (
           <Preloader />
+        ) : (
+          <Main movies={movies} searchMovies={this.searchMovies} />
+        )} */}
+        {loading ? (
+          <Preloader />
+        ) : (
+          <Main movies={movies} searchMovies={this.searchMovies} />
         )}
         <Footer />
       </>
