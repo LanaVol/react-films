@@ -14,7 +14,6 @@ class App extends React.Component {
   };
 
   componentDidMount() {
-    console.log(API_KEY);
     fetch(`http://www.omdbapi.com?apikey=${API_KEY}&s=matrix`)
       .then((res) => res.json())
       .then((data) => this.setState({ movies: data.Search, loading: false }))
