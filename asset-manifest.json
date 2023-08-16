@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/react-films-practise/static/css/main.90afd427.css",
+    "main.js": "/react-films-practise/static/js/main.1ccc3203.js",
+    "index.html": "/react-films-practise/index.html",
+    "main.90afd427.css.map": "/react-films-practise/static/css/main.90afd427.css.map",
+    "main.1ccc3203.js.map": "/react-films-practise/static/js/main.1ccc3203.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.90afd427.css",
+    "static/js/main.1ccc3203.js"
+  ]
+}
