@@ -9,23 +9,23 @@ const API_KEY = process.env.REACT_APP_API_KEY;
 class App extends React.Component {
   state = {
     movies: [],
-    error: "",
+    error: false,
     loading: true,
   };
 
   componentDidMount() {
-    fetch(`http://www.omdbapi.com?apikey=${API_KEY}&s=matrix`)
+    fetch(`https://www.omdbapi.com?apikey=${API_KEY}&s=matrix`)
       .then((res) => res.json())
       .then((data) => this.setState({ movies: data.Search, loading: false }))
       .catch((err) => {
-        console.log("error");
+        console.error(err);
+        this.setState({ loading: false, error: true });
       });
   }
 
   searchMovies = (str, type = "all") => {
-    // this.setState({ loading: true });
     fetch(
-      `http://www.omdbapi.com?apikey=${API_KEY}&s=${str}${
+      `https://www.omdbapi.com?apikey=${API_KEY}&s=${str}${
         type !== "all" ? `&type=${type}` : ""
       }`
     )
@@ -35,7 +35,8 @@ class App extends React.Component {
         this.setState({ movies: data.Search, loading: false });
       })
       .catch((err) => {
-        console.log("error");
+        console.error(err);
+        this.setState({ loading: false, error: true });
       });
   };
 
@@ -45,14 +46,9 @@ class App extends React.Component {
       <>
         <Header />
 
-        {/* {error ? (
-          <p>Oops, not found this page</p>
+        {error ? (
+          <h3>Oops, not found this page</h3>
         ) : loading ? (
-          <Preloader />
-        ) : (
-          <Main movies={movies} searchMovies={this.searchMovies} />
-        )} */}
-        {loading ? (
           <Preloader />
         ) : (
           <Main movies={movies} searchMovies={this.searchMovies} />
