@@ -2,7 +2,7 @@
   "name": "react-films-practise",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://LanaVol.github.io/react-films",
+  "homepage": "https://LanaVol.github.io/react-films-practise",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
