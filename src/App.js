@@ -3,7 +3,7 @@ import { Footer } from "./layout/Footer";
 import { Main } from "./layout/Main";
 import Preloader from "./components/Preloader";
 import React from "react";
-
+// appi_key
 const API_KEY = process.env.REACT_APP_API_KEY;
 
 class App extends React.Component {
