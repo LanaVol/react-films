@@ -40,6 +40,19 @@ class App extends React.Component {
       });
   };
 
+  setPages = (str, page) => {
+    fetch(`https://www.omdbapi.com?apikey=${API_KEY}&s=${str}&page=${page}`)
+      .then((res) => res.json())
+      .then((data) => {
+        this.setState({ loading: true });
+        this.setState({ movies: data.Search, loading: false });
+      })
+      .catch((err) => {
+        console.error(err);
+        this.setState({ loading: false, error: true });
+      });
+  };
+
   render() {
     const { movies, loading, error } = this.state;
     return (
@@ -51,7 +64,11 @@ class App extends React.Component {
         ) : loading ? (
           <Preloader />
         ) : (
-          <Main movies={movies} searchMovies={this.searchMovies} />
+          <Main
+            movies={movies}
+            searchMovies={this.searchMovies}
+            setPage={this.setPages}
+          />
         )}
         <Footer />
       </>
