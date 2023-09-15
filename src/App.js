@@ -11,6 +11,7 @@ class App extends React.Component {
     movies: [],
     error: false,
     loading: true,
+    title: "",
   };
 
   componentDidMount() {
@@ -40,12 +41,20 @@ class App extends React.Component {
       });
   };
 
-  setPages = (str, page) => {
-    fetch(`https://www.omdbapi.com?apikey=${API_KEY}&s=${str}&page=${page}`)
+  getTitleSearch = (str = "matrix") => {
+    this.state.title = str;
+  };
+
+  setPages = (page) => {
+    console.log(this.state.title);
+    fetch(
+      `https://www.omdbapi.com?apikey=${API_KEY}&s=${this.state.title}&page=${page}`
+    )
       .then((res) => res.json())
       .then((data) => {
-        this.setState({ loading: true });
-        this.setState({ movies: data.Search, loading: false });
+        console.log("data");
+        // this.setState({ loading: true });
+        // this.setState({ movies: data.Search, loading: false });
       })
       .catch((err) => {
         console.error(err);
@@ -55,6 +64,7 @@ class App extends React.Component {
 
   render() {
     const { movies, loading, error } = this.state;
+    // console.log(this.setPages);
     return (
       <>
         <Header />
@@ -67,7 +77,8 @@ class App extends React.Component {
           <Main
             movies={movies}
             searchMovies={this.searchMovies}
-            setPage={this.setPages}
+            setPages={this.setPages}
+            getTitleSearch={this.getTitleSearch}
           />
         )}
         <Footer />
