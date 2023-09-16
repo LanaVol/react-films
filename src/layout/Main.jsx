@@ -7,7 +7,7 @@ function Main({ movies, searchMovies, setPages, getTitleSearch }) {
     <main className="container content">
       <Search searchMovies={searchMovies} getTitleSearch={getTitleSearch} />
       <Cards movies={movies} />
-      <PaginationComponent setPages={setPages} />
+      {/* <PaginationComponent setPages={setPages} /> */}
     </main>
   );
 }
