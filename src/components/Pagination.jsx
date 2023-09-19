@@ -12,6 +12,7 @@ class PaginationComponent extends React.Component {
   };
 
   render() {
+    console.log(this.props.allResults);
     return (
       <ul className="pagination" onClick={this.handleChoosePage}>
         <li className="active">

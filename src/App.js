@@ -12,12 +12,19 @@ class App extends React.Component {
     error: false,
     loading: true,
     title: "",
+    allResults: 1,
   };
 
   componentDidMount() {
     fetch(`https://www.omdbapi.com?apikey=${API_KEY}&s=matrix`)
       .then((res) => res.json())
-      .then((data) => this.setState({ movies: data.Search, loading: false }))
+      .then((data) =>
+        this.setState({
+          movies: data.Search,
+          allResults: data.totalResults,
+          loading: false,
+        })
+      )
       .catch((err) => {
         console.error(err);
         this.setState({ loading: false, error: true });
@@ -33,7 +40,11 @@ class App extends React.Component {
       .then((res) => res.json())
       .then((data) => {
         this.setState({ loading: true });
-        this.setState({ movies: data.Search, loading: false });
+        this.setState({
+          movies: data.Search,
+          allResults: data.totalResults,
+          loading: false,
+        });
       })
       .catch((err) => {
         console.error(err);
@@ -63,8 +74,8 @@ class App extends React.Component {
   };
 
   render() {
-    const { movies, loading, error } = this.state;
-    // console.log(this.setPages);
+    const { movies, loading, error, allResults } = this.state;
+    console.log(this.state);
     return (
       <>
         <Header />
@@ -79,6 +90,7 @@ class App extends React.Component {
             searchMovies={this.searchMovies}
             setPages={this.setPages}
             getTitleSearch={this.getTitleSearch}
+            allResults={allResults}
           />
         )}
         <Footer />
