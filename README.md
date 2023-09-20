@@ -6,6 +6,7 @@ The simple mockup for displaying information about movies list from OMDB API fet
 
 - Filtering categories of data
 - Search movies
+- Pagination pages
 
 ## Preview
 
