@@ -11,19 +11,62 @@ class PaginationComponent extends React.Component {
     this.props.setPages(this.state.pageNumber);
   };
 
+  nextPage = () => {
+    if (+this.state.pageNumber === this.props.allPages.length) {
+      return;
+    } else {
+      this.setState({ pageNumber: this.state.pageNumber + 1 });
+      this.props.setPages(this.state.pageNumber);
+    }
+    // console.log(this.props.allPages.length);
+    // console.log(this.state.pageNumber);
+  };
+  previousPage = () => {
+    if (+this.state.pageNumber === 1) {
+      return;
+    } else {
+      this.setState({ pageNumber: this.state.pageNumber - 1 });
+      this.props.setPages(this.state.pageNumber);
+    }
+  };
+
   render() {
-    console.log(this.state.pageNumber);
     return (
       <ul className="pagination">
-        {this.props.allPages.map((number) => (
+        <li
+          className={+this.state.pageNumber === 1 ? "disabled" : "waves-effect"}
+          onClick={this.previousPage}
+        >
+          <a href="#!">
+            <i className="material-icons">chevron_left</i>
+          </a>
+        </li>
+        {this.props.allPages.map((number, i) => (
           <li
-            className="waves-effect"
+            className={
+              +this.state.pageNumber === number
+                ? "active cyan darken-4"
+                : "waves-effect"
+            }
             key={number}
             onClick={this.handleChoosePage}
           >
             <a href="#!">{number}</a>
           </li>
         ))}
+        <li
+          className={
+            +this.state.pageNumber ===
+            this.props.allPages[this.props.allPages.length - 1]
+              ? "disabled"
+              : "waves-effect"
+          }
+          onClick={this.nextPage}
+        >
+          <a href="#!">
+            <i className="material-icons">chevron_right</i>
+          </a>
+        </li>
       </ul>
     );
   }

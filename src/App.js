@@ -35,7 +35,7 @@ class App extends React.Component {
 
   searchMovies = (str, type = "all") => {
     fetch(
-      `https://www.omdbapi.com?apikey=${API_KEY}&s=${str}${
+      `https://www.omdbapi.com?apikey=${API_KEY}&s=${str ? str : "matrix"}${
         type !== "all" ? `&type=${type}` : ""
       }`
     )
