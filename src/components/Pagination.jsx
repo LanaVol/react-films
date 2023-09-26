@@ -5,6 +5,7 @@ class PaginationComponent extends React.Component {
     title: "",
     pageNumber: 1,
     countPaginPerPage: 7,
+    pagesList: this.props.allPages.fill().map((_, index) => index + 1),
   };
 
   handleChoosePage = (e) => {
@@ -30,12 +31,9 @@ class PaginationComponent extends React.Component {
   };
 
   showPaginationPagePerPage = () => {
-    let firstPaginNumber = lastPaginNumber - this.state.countPaginPerPage;
-    let lastPaginNumber = this.state.pageNumber * this.state.countPaginPerPage;
-    let currentPaginPages = this.props.allPages.slice(
-      firstPaginNumber,
-      lastPaginNumber
-    );
+    let lastNumPaginPage;
+    let firstNumPaginPage;
+
     const listPaginNumber = [];
 
     for (
@@ -48,8 +46,10 @@ class PaginationComponent extends React.Component {
   };
 
   render() {
-    const { pageNumber } = this.state;
+    const { pageNumber, pagesList } = this.state;
     const { allPages } = this.props;
+    console.log(this.state.pagesList);
+
     return (
       <ul className="pagination">
         <li
@@ -73,17 +73,23 @@ class PaginationComponent extends React.Component {
           <a href="#!">{allPages[0]}</a>
         </li>
 
-        {allPages.map((number, i) => (
-          <li
-            className={
-              +pageNumber === number ? "active cyan darken-4" : "waves-effect"
-            }
-            key={number}
-            onClick={this.handleChoosePage}
-          >
-            <a href="#!">{number}</a>
-          </li>
-        ))}
+        {allPages.map((number, i) => {
+          if (i !== 0 && i !== allPages.length - 1) {
+            return (
+              <li
+                className={
+                  +pageNumber === number
+                    ? "active cyan darken-4"
+                    : "waves-effect"
+                }
+                key={number}
+                onClick={this.handleChoosePage}
+              >
+                <a href="#!">{number}</a>
+              </li>
+            );
+          }
+        })}
 
         <li
           onClick={this.handleChoosePage}
