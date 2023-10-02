@@ -63,7 +63,11 @@ class App extends React.Component {
       `https://www.omdbapi.com?apikey=${API_KEY}&s=${this.state.title}&page=${page}`
     )
       .then((res) => res.json())
+
       .then((data) => {
+        if (!Array.isArray(data)) {
+          throw new Error("Not found!");
+        }
         console.log("data", data);
         this.setState({ loading: true });
         this.setState({ movies: data.Search, loading: false });

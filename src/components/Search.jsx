@@ -31,7 +31,7 @@ class Search extends React.Component {
             <input
               type="search"
               className="validate"
-              placeholder="search"
+              placeholder="Search"
               value={this.state.search}
               onChange={(e) => {
                 this.setState({ search: e.target.value });

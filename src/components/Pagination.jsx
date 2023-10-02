@@ -1,11 +1,11 @@
 import React from "react";
+import { PointBtn } from "./PointBtn";
 
 class PaginationComponent extends React.Component {
   state = {
     title: "",
     pageNumber: 1,
-    countPaginPerPage: 7,
-    pagesList: this.props.allPages.fill().map((_, index) => index + 1),
+    countPaginPerPage: 2,
   };
 
   handleChoosePage = (e) => {
@@ -30,25 +30,20 @@ class PaginationComponent extends React.Component {
     }
   };
 
-  showPaginationPagePerPage = () => {
-    let lastNumPaginPage;
-    let firstNumPaginPage;
-
-    const listPaginNumber = [];
-
-    for (
-      let i = 1;
-      i <= Math.ceil(this.props.allPages / this.state.countPaginPerPage);
-      i++
-    ) {
-      listPaginNumber.push(i);
-    }
-  };
-
   render() {
-    const { pageNumber, pagesList } = this.state;
+    const { pageNumber } = this.state;
     const { allPages } = this.props;
-    console.log(this.state.pagesList);
+
+    let lastNumPaginPage =
+      +this.state.pageNumber + this.state.countPaginPerPage;
+    let firstNumPaginPage = lastNumPaginPage - this.state.countPaginPerPage - 1;
+    let currentPages = this.props.allPages.slice(
+      firstNumPaginPage,
+      lastNumPaginPage
+    );
+    console.log("currentPages", currentPages);
+    console.log("lastNumPaginPage", lastNumPaginPage);
+    console.log("firstNumPaginPage", firstNumPaginPage);
 
     return (
       <ul className="pagination">
@@ -72,9 +67,10 @@ class PaginationComponent extends React.Component {
         >
           <a href="#!">{allPages[0]}</a>
         </li>
+        {+pageNumber > 2 ? <PointBtn /> : null}
 
-        {allPages.map((number, i) => {
-          if (i !== 0 && i !== allPages.length - 1) {
+        {currentPages.map((number, i) => {
+          if (number !== 1 && number !== allPages[allPages.length - 1]) {
             return (
               <li
                 className={
@@ -91,6 +87,7 @@ class PaginationComponent extends React.Component {
           }
         })}
 
+        {+pageNumber >= allPages[allPages.length - 4] ? null : <PointBtn />}
         <li
           onClick={this.handleChoosePage}
           className={
