@@ -65,7 +65,7 @@ class App extends React.Component {
       .then((res) => res.json())
 
       .then((data) => {
-        if (!Array.isArray(data)) {
+        if (!Array.isArray(data.Search)) {
           throw new Error("Not found!");
         }
         console.log("data", data);
