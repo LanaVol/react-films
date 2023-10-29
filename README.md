@@ -11,3 +11,5 @@ The simple mockup for displaying information about movies list from OMDB API fet
 ## Preview
 
 Link to preview: https://lanavol.github.io/react-films-practise/
+
+![Alt text](./src/images/image.png)
