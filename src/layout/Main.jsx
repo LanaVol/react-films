@@ -1,6 +1,7 @@
 import { Cards } from "../components/Cards";
 import { Search } from "../components/Search";
 import { PaginationComponent } from "../components/Pagination";
+import img from "../images/bgImg.svg";
 
 function Main({
   movies,
@@ -21,15 +22,17 @@ function Main({
   }
 
   return (
-    <main className="container content">
-      <Search searchMovies={searchMovies} getTitleSearch={getTitleSearch} />
-      <Cards movies={currentMovies} />
-      <PaginationComponent
-        setPages={setPages}
-        allResults={allResults}
-        countPerPage={countPerPage}
-        allPages={pageNumbers}
-      />
+    <main className=" content" style={{ backgroundImage: `url(${img})` }}>
+      <div className="container">
+        <Search searchMovies={searchMovies} getTitleSearch={getTitleSearch} />
+        <Cards movies={currentMovies} />
+        <PaginationComponent
+          setPages={setPages}
+          allResults={allResults}
+          countPerPage={countPerPage}
+          allPages={pageNumbers}
+        />
+      </div>
     </main>
   );
 }

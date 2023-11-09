@@ -1,7 +1,7 @@
 function Card({ movie }) {
   const { Poster, Title, Type, Year } = movie;
   return (
-    <div className="row">
+    <div className="row" style={{ height: "100%" }}>
       <div className="col s12 m12" style={{ height: "100%" }}>
         <div
           className="card"
@@ -17,9 +17,21 @@ function Card({ movie }) {
               <img
                 className="activator"
                 src={`http://via.placeholder.com/280x350?text=${Title}`}
+                style={{
+                  minHeight: "450px",
+                  height: "100%",
+                  display: "block",
+                }}
               />
             ) : (
-              <img src={Poster} />
+              <img
+                src={Poster}
+                style={{
+                  minHeight: "450px",
+                  height: "100%",
+                  display: "block",
+                }}
+              />
             )}
           </div>
 
@@ -38,7 +50,13 @@ function Card({ movie }) {
                 justifyContent: "space-between",
               }}
             >
-              <p>{`Category: ${Type}`}</p>
+              <p style={{ display: "flex", alignItems: "center", gap: "5px" }}>
+                <i className="small material-icons" style={{ color: "grey" }}>
+                  palette
+                </i>
+                {Type}
+              </p>
+
               <p>{Year}</p>
             </div>
           </div>
