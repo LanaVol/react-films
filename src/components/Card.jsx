@@ -2,8 +2,16 @@ function Card({ movie }) {
   const { Poster, Title, Type, Year } = movie;
   return (
     <div className="row">
-      <div className="col s12 m12">
-        <div className="card">
+      <div className="col s12 m12" style={{ height: "100%" }}>
+        <div
+          className="card"
+          style={{
+            height: "100%",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+          }}
+        >
           <div className="card-image waves-effect waves-block waves-light">
             {Poster === "N/A" ? (
               <img
@@ -14,8 +22,12 @@ function Card({ movie }) {
               <img src={Poster} />
             )}
           </div>
+
           <div>
-            <span className="card-title activator grey-text text-darken-4">
+            <span
+              className="card-title activator grey-text text-darken-4"
+              style={{ fontWeight: "500" }}
+            >
               {Title}
             </span>
             <div
@@ -26,7 +38,7 @@ function Card({ movie }) {
                 justifyContent: "space-between",
               }}
             >
-              <p>{Type}</p>
+              <p>{`Category: ${Type}`}</p>
               <p>{Year}</p>
             </div>
           </div>
